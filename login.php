@@ -12,7 +12,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $password = $_POST['password'];
         $hashedPassword = sha1($password);
 
-
+        // prepare sql statement
         $sql = "select * from loginInformation where username='$username' and password='$hashedPassword'";
         $statement = $conn->prepare($sql);
         $statement->execute();
@@ -28,9 +28,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         else {
             header("location: index.php?login_error=1");
         }
-
+        
         $conn->close();
-
     }
 }
 ?>
