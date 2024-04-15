@@ -3,14 +3,16 @@
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (isset($_POST['command'])) {
             $command = $_POST['command'];
-            $message = "Use only 'ls' and 'cat'";
 
-            
-            if (strpos($command, "ls") == 0 || strpos($command, "cat") == 0) {
-                $message = system($command);
+            $fileReadPattern = "/\w+\s{1}[\w\d]+\.{1}\w+$/";
+            $fileListPattern = "/^\w+\s{1}\-{1}\w+$/";
+
+            if (preg_match($fileReadPattern, $command) || preg_match($fileListPattern, $command)) {
+                echo system($command);
             }
-
-            echo "$message";
+            else {
+                echo "Can only read file and list file";
+            }
         }
     }
 ?>
