@@ -12,6 +12,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $password = $_POST['password'];
         $hashedPassword = sha1($password);
 
+        $validWord = "/^[\w]+$/";
+
+        if (!preg_match($validWord, $username) && !preg_match($validWord, $password)) {
+            header("location: index.php?login_error=1");
+        }
+        
         // prepare sql statement
         $sql = "select * from loginInformation where username='$username' and password='$hashedPassword'";
         $statement = $conn->prepare($sql);
