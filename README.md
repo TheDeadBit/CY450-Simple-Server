@@ -31,7 +31,7 @@ Simple PHP server with MySQL database
 ### Without XAMPP
 1. Login in mysql
     ```
-    ./mysql -u root -p
+    mysql -u root -p
     ```
 2. Create new database
     ```
